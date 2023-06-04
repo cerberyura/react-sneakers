@@ -144,6 +144,10 @@ header .icon {
   border-radius: 20px;
   overflow: hidden;
   padding: 20px;
+  margin-bottom: 20px;
+}
+.cartItem:last-child {
+  margin-bottom: 0;
 }
 .cartItem .cartItemImg {
   height: 70px;
@@ -160,12 +164,13 @@ header .icon {
 .cartItem b {
   font-size: 14px;
 }
-.cartItem .removeBtn {
+
+.removeBtn {
   opacity: 0.5;
   cursor: pointer;
   transition: opacity 0.15s ease-in-out;
 }
-.cartItem .removeBtn:hover {
+.removeBtn:hover {
   opacity: 1;
 }
 
@@ -219,6 +224,12 @@ header .icon {
 .card h5 {
   font-weight: 400;
   font-size: 14px;
+}
+
+.items {
+  flex: 1;
+  overflow: auto;
+  margin-bottom: 40px;
 }
 
 /*# sourceMappingURL=index.css.map */
