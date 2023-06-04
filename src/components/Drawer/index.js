@@ -42,7 +42,7 @@ export const Drawer = () => {
               <li className="d-flex">
                 <span>Сума</span>
                 <div></div>
-                <b>15500 ₴.</b>
+                <b>15600 ₴.</b>
               </li>
               <li className="d-flex">
                 <span>Податок 5%:</span>
