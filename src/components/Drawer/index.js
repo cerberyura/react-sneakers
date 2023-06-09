@@ -1,36 +1,31 @@
 import React from "react";
 import styles from './Drawer.module.scss'
 
-export const Drawer = () => {
+export const Drawer = ({onClose, items = []}) => {
+
   return (
     <div className={styles.overlay}>
       <div className={styles.drawer}>
         <div className="items">
           <h2 className="mb-40 d-flex justify-between align-center ">
             Кошик
-            <img className="removeBtn cu-p" width={32} height={32} src="/img/btn-remove.svg" alt="remove"/>
+            <img className="removeBtn cu-p" onClick={onClose} width={32} height={32} src="/img/btn-remove.svg" alt="close"/>
           </h2>
 
-          <div className="cartItem d-flex align-center">
-            <img
-              className="cartItemImg"
-              src="/img/sneakers/1.jpg" alt="sneakers"/>
-            <div className="mr-20">
-              <p className="mb-5">Чоловічі Кросівки Nike Blazer Mid Suede</p>
-              <b>5000 ₴</b>
-            </div>
-            <img className="removeBtn" width={32} height={32} src="/img/btn-remove.svg" alt="remove"/>
-          </div>
-          <div className="cartItem d-flex align-center">
-            <img
-              className="cartItemImg"
-              src="/img/sneakers/2.jpg" alt="sneakers"/>
-            <div className="mr-20">
-              <p className="mb-5">Чоловічі Кросівки Nike Blazer Mid Suede</p>
-              <b>5000 ₴</b>
-            </div>
-            <img className="removeBtn" width={32} height={32} src="/img/btn-remove.svg" alt="remove"/>
-          </div>
+          {
+            items.map((obj, index) => (
+              <div key={index} className="cartItem d-flex align-center mb-20">
+                <img
+                  className="cartItemImg"
+                  src={obj.imageUrl} alt="sneakers"/>
+                <div className="mr-20">
+                  <p className="mb-5">{obj.title}</p>
+                  <b>{obj.price} ₴</b>
+                </div>
+                <img className="removeBtn" width={32} height={32} src="/img/btn-remove.svg" alt="remove"/>
+              </div>
+            ))
+          }
 
 
         </div>
