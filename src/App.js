@@ -1,36 +1,35 @@
 import {Header} from "./components/Header";
 import {Drawer} from "./components/Drawer";
 import {Card} from "./components/Card";
-
-const arr = [
-  {
-    title: 'Чоловічі Кросівки Nike Blazer Mid Suede',
-    price: 5500,
-    imageUrl: '/img/sneakers/1.jpg'
-  },
-  {
-    title: 'Чоловічі Кросівки Nike Air Max 270',
-    price: 3400,
-    imageUrl: '/img/sneakers/2.jpg'
-
-  },
-  {
-    title: 'Чоловічі Кросівки Nike Blazer Mid Suede white',
-    price: 1200,
-    imageUrl: '/img/sneakers/3.jpg'
-  },
-  {
-    title: 'Чоловічі Кросівки Puma X Aka Boku Future Rider',
-    price: 7100,
-    imageUrl: '/img/sneakers/4.jpg'
-  },
-]
+import React from "react";
 
 const App = () => {
+  const [items, setItems] = React.useState([]);
+  const [cartItems,  setCartItems] = React.useState([]);
+  const [cartOpened, setCartOpened] = React.useState(false);
+
+  React.useEffect( () => {
+    fetch('https://640a6cbc65d3a01f98fecb0f.mockapi.io/sneakers')
+      .then((res) => {
+        return res.json();
+      })
+      .then((json) => {
+        setItems(json)
+      })
+  }, []);
+
+  const onAddToCard = (obj) => {
+    setCartItems(prev => [...prev, obj]);
+  }
+
+  console.log(cartItems)
+
+
   return (<>
       <div className="wrapper clear">
-        <Drawer/>
-        <Header/>
+
+        {cartOpened && <Drawer items={cartItems} onClose={() => setCartOpened(false)}/>}
+        <Header onClickCart={() => setCartOpened(true)}/>
         <div className="content p-40">
           <div className="d-flex mb-40 justify-between ">
             <h1>Всі кросівки</h1>
@@ -40,13 +39,15 @@ const App = () => {
             </div>
           </div>
 
-          <div className="d-flex ">
+          <div className="d-flex flex-wrap">
             {
-              arr.map((obj) => (
+              items.map((obj, index) => (
                 <Card
+                  key={index}
                   title={obj.title}
                   price={obj.price}
                   imageUrl={obj.imageUrl}
+                  onPlus={onAddToCard}
                 />
               ))
             }
